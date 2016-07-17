@@ -4,4 +4,4 @@
 
 ## Usage:
 	Simply include this script in your <head> tag (after your stylesheets):
-	<script src="https://www.gitcdn.xyz/repo/conall-hawks/css-vars/master/css-vars.js"></script>
+	<script src="https://www.gitcdn.xyz/repo/conall-hawks/css-vars/master/css-vars.min.js"></script>
