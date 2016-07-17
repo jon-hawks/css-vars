@@ -14,7 +14,7 @@ function cssVars(){
 		var foundVars = {};
 		for(var i = styleElements.length - 1; i >= 0; i--){
 			if(typeof styleElements[i].innerHTML !== 'string') continue;
-			foundVars[i] = styleElements[i].innerHTML.match(/(--.+:.+;)/g);
+			foundVars[i] = styleElements[i].innerHTML.match(/(--[^;)]+:.+;)/g);
 		}
 		
 		// Parse CSS variables.
@@ -22,8 +22,8 @@ function cssVars(){
 		for(var i in foundVars){
 			if(foundVars[i] !== 'object' && !foundVars[i]) continue;
 			for(var j = foundVars[i].length - 1; j >= 0; j--){
-				var curVar = foundVars[i][j].split(/:\s*/);
-				parsedVars[curVar[0]] = curVar[1].replace(/;/, '');
+				var curVar = foundVars[i][j].split(/:/);
+				parsedVars[curVar[0]] = curVar[1].split(/;/)[0];
 			}
 		}
 		
@@ -33,7 +33,6 @@ function cssVars(){
 			for(var j in parsedVars){
 				var regex = new RegExp('var\\(\\s*' + j + '\\s*\\)', 'g');
 				styleElements[i].innerHTML = styleElements[i].innerHTML.replace(regex, parsedVars[j]);
-				var regex2 = new RegExp('var\\(\\s*.+\\s*,\\s*(.+)\\)', 'g');
 			}
 		}
 	}
